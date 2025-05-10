@@ -1,0 +1,73 @@
+.subckt XOR2 V1 V2 out Vcc
+XU1 Vcc V1bar memristor
+M1 V1bar V1 0 0 NMOS l=22.5nm w=1080nm
+XU2 Vcc V2bar memristor
+M2 V2bar V2 0 0 NMOS l=22.5nm w=1080nm
+XU7 N004 N003 memristor
+XU8 N004 N006 memristor
+M11 Vcc N004 N005 Vcc PMOS l=45nm w=240nm
+M12 N005 N004 0 0 NMOS l=45nm w=120nm
+M13 Vcc N005 out Vcc PMOS l=45nm w=240nm
+M14 out N005 0 0 NMOS l=45nm w=120nm
+XU3 V1 N002 memristor
+XU4 V2bar N002 memristor
+M3 Vcc N002 N001 Vcc PMOS l=22.5nm w=1080nm
+M4 N001 N002 0 0 NMOS l=360nm w=1080nm
+M5 N003 N001 0 0 NMOS l=180nm w=360nm
+M6 Vcc N001 N003 Vcc PMOS l=90nm w=360nm
+XU5 V1bar N008 memristor
+XU6 V2 N008 memristor
+M7 Vcc N008 N007 Vcc PMOS l=22.5nm w=1080nm
+M8 N007 N008 0 0 NMOS l=360nm w=1080nm
+M9 N006 N007 0 0 NMOS l=180nm w=360nm
+M10 Vcc N007 N006 Vcc PMOS l=90nm w=360nm
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\P V S Sukeerthi\AppData\Local\LTspice\lib\cmp\standard.mos
+.tran 100u
+.lib memristor.sub
+.backanno
+.end
+
+.subckt OR2 V1 V2 out Vcc
+XU1 N001 V1 memristor
+XU2 N001 V2 memristor
+M1 Vcc N001 N002 Vcc PMOS l=180nm w=1080nm
+M2 N002 N001 0 0 NMOS l=22.5nm w=1080nm
+M3 Vcc N002 out Vcc PMOS
+M4 out N002 0 0 NMOS
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\P V S Sukeerthi\AppData\Local\LTspice\lib\cmp\standard.mos
+.tran 6u
+* NOR Gate
+.lib memristor.sub
+.backanno
+.end
+
+.subckt NOT A Y Vcc
+XU1 Vcc Y memristor
+M1 Y A 0 0 NMOS l=22.5nm w=1080nm
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\P V S Sukeerthi\AppData\Local\LTspice\lib\cmp\standard.mos
+.tran 100m
+.lib memristor.sub
+.backanno
+.end
+
+.subckt 2 V1 V2 out Vcc
+XU1 V1 N002 memristor
+XU2 V2 N002 memristor
+M1 Vcc N002 N001 Vcc PMOS l=22.5nm w=1080nm
+M2 N001 N002 0 0 NMOS l=360nm w=1080nm
+M3 out N001 0 0 NMOS l=180nm w=360nm
+M4 Vcc N001 out Vcc PMOS l=90nm w=360nm
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Users\P V S Sukeerthi\AppData\Local\LTspice\lib\cmp\standard.mos
+.tran 80u
+* NAND Gate
+.lib memristor.sub
+.backanno
+.end
